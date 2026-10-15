@@ -28,6 +28,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 
+
 @Composable
 fun FormDataDiri(modifier: Modifier){
     //variabel-variabel untuk mengingat nilai masukan dari keyboard
@@ -41,11 +42,9 @@ fun FormDataDiri(modifier: Modifier){
     var alamat by remember { mutableStateOf(value = "") }
     var jenis by remember { mutableStateOf(value = "") }
 
-    Column(
-        modifier = Modifier.padding(top = 50.dp),
+    Column(modifier = Modifier.padding(top = 50.dp),
         verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+        horizontalAlignment = Alignment.CenterHorizontally) {
         OutlinedTextField(
             value = textNama,
             singleLine = true,
@@ -58,17 +57,15 @@ fun FormDataDiri(modifier: Modifier){
         )
         Row {
             gender.forEach { item ->
-                Row(
-                    modifier = Modifier.selectable(
-                        selected = textJK == item,
-                        onClick = { textJK = item }
-                    ),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+                Row(modifier = Modifier.selectable(
+                    selected = textJK == item,
+                    onClick = { textJK = item }
+                ), verticalAlignment = Alignment.CenterVertically) {
                     RadioButton(
                         selected = textJK == item,
-                        onClick = { textJK = item }
-                    )
+                        onClick = {
+                            textJK = item
+                        })
                     Text(item)
                 }
             }
@@ -85,18 +82,21 @@ fun FormDataDiri(modifier: Modifier){
         HorizontalDivider(
             modifier = Modifier.padding(
                 bottom = dimensionResource(id = R.dimen.padding_medium),
-                top = dimensionResource(id = R.dimen.padding_medium)
+                top = dimensionResource(
+                    id = R.dimen.padding_medium
+                )
             ),
             thickness = dimensionResource(id = R.dimen.divider_tipis),
             color = Color.DarkGray
         )
         Button(
             modifier = Modifier.fillMaxWidth(fraction = 1f),
+            // the button is enabled when the user makes a selection
             enabled = textAlamat.isNotEmpty(),
             onClick = {
-                nama = textNama
-                jenis = textJK
-                alamat = textAlamat
+                nama=textNama
+                jenis=textJK
+                alamat=textAlamat
             }
         ) {
             Text(stringResource(id = R.string.submit))
@@ -104,7 +104,9 @@ fun FormDataDiri(modifier: Modifier){
         HorizontalDivider(
             modifier = Modifier.padding(
                 bottom = dimensionResource(id = R.dimen.padding_medium),
-                top = dimensionResource(id = R.dimen.padding_medium)
+                top = dimensionResource(
+                    id = R.dimen.padding_medium
+                )
             ),
             thickness = dimensionResource(id = R.dimen.divider_tipis),
             color = Color.DarkGray
@@ -115,12 +117,13 @@ fun FormDataDiri(modifier: Modifier){
             modifier = Modifier
                 .height(100.dp)
                 .width(300.dp)
-        ){
-            Column (modifier = Modifier.padding(horizontal = 5.dp, vertical = 15.dp),){
-                Text(text = "Nama : "+nama, color = Color.White )
-                Text(text = "Gender : "+jenis, color = Color.White )
-                Text(text = "Alamat : "+alamat, color = Color.White)
+        ) {
+            Column(modifier = Modifier.padding(horizontal = 5.dp, vertical = 15.dp),) {
+                Text(text = "Nama : " + nama, color = Color.White)
+                Text(text = "Gender : " + jenis, color = Color.White)
+                Text(text = "Alamat : " + alamat, color = Color.White)
             }
         }
-    }
 
+        }
+    }
